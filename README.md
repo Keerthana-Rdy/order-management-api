@@ -2,13 +2,14 @@
 
 # Order Management API
 
-A RESTful order management service built with **Java 21** and **Spring Boot 3**. It supports creating, retrieving, updating, and deleting orders, with request validation, consistent error responses, and unit tests.
+A RESTful order management service built with **Java 21** and **Spring Boot 4**. It supports creating, retrieving, updating, and deleting orders, with request validation, consistent error responses, and unit tests.
 
 ## Tech Stack
-- Java 21, Spring Boot 3 (Web, Data JPA, Validation, Actuator)
+- Java 21, Spring Boot 4 (Web, Data JPA, Validation, Actuator)
 - H2 in-memory database
 - JUnit 5, Mockito, MockMvc, AssertJ
 - Maven, GitHub Actions CI
+- springdoc-openapi (Swagger UI)
 
 ## Features
 - CRUD endpoints for orders, with total price calculated server-side
@@ -17,6 +18,8 @@ A RESTful order management service built with **Java 21** and **Spring Boot 3**.
 - Standardized error responses using RFC 7807 `ProblemDetail`
 - Layered architecture: controller → service → repository, with DTOs separating the API from the database entity
 - Health check via Spring Boot Actuator
+- Pagination, sorting, and filtering by status (`GET /api/orders?status=PAID&page=0&size=10`)
+- Interactive API docs with Swagger UI at `/swagger-ui.html`
 
 ## Running Locally
 Requires Java 21.
@@ -61,5 +64,3 @@ Validation error response:
 
 ## Roadmap
 - PostgreSQL with Docker Compose
-- Pagination and filtering by status
-- OpenAPI/Swagger documentation

@@ -5,7 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springdoc.core.annotations.ParameterObject;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -24,8 +27,10 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponse> findAll() {
-        return service.findAll();
+    public PageResponse<OrderResponse> findAll(
+            @RequestParam(required = false) OrderStatus status,
+            @ParameterObject @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return service.findAll(status, pageable);
     }
 
     @GetMapping("/{id}")

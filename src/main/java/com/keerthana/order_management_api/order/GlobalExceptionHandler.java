@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.springframework.data.core.PropertyReferenceException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -25,4 +26,11 @@ public class GlobalExceptionHandler {
         problem.setProperty("errors", errors);
         return problem;
     }
+
+    @ExceptionHandler(PropertyReferenceException.class)
+    public ProblemDetail handleInvalidSort(PropertyReferenceException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,
+                "Invalid sort property: " + ex.getPropertyName());
+    }
+
 }

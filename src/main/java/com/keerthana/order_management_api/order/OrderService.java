@@ -1,7 +1,8 @@
 package com.keerthana.order_management_api.order;
 
 import org.springframework.stereotype.Service;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class OrderService {
@@ -21,8 +22,11 @@ public class OrderService {
         return OrderResponse.from(repository.save(order));
     }
 
-    public List<OrderResponse> findAll() {
-        return repository.findAll().stream().map(OrderResponse::from).toList();
+    public PageResponse<OrderResponse> findAll(OrderStatus status, Pageable pageable) {
+        Page<Order> page = (status == null)
+                ? repository.findAll(pageable)
+                : repository.findByStatus(status, pageable);
+        return PageResponse.from(page.map(OrderResponse::from));
     }
 
     public OrderResponse findById(Long id) {
