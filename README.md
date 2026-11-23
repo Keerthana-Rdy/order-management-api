@@ -1,3 +1,5 @@
+![CI](https://github.com/Keerthana-Rdy/order-management-api/actions/workflows/ci.yml/badge.svg)
+
 # Order Management API
 
 A RESTful order management service built with **Java 21** and **Spring Boot 3**. It supports creating, retrieving, updating, and deleting orders, with request validation, consistent error responses, and unit tests.
